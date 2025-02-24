@@ -3,9 +3,9 @@ import torch.nn as nn
 from transformers import PreTrainedModel, AutoModel, AutoConfig, AutoTokenizer
 
 class consts:
-    XLMR_model = "stulcrad/XLM-RoBERTa-2"
-    RobeCzech_model = "stulcrad/Robeczech-2"
-    mBERT_model = "stulcrad/mBERT-2"
+    XLMR = 'xlm-roberta-large'
+    mBERT = 'bert-base-multilingual-cased'
+    RoBeCzech = 'ufal/robeczech-base'
 
     ADDITIONAL_SPECIAL_TOKENS = ['[unused1]', '[unused2]', '[unused3]', '[unused4]', '[unused5]']
 
@@ -20,7 +20,7 @@ class RelationExtractionModel(PreTrainedModel):
 
     def __init__(self, model_config: AutoConfig, tokenizer: AutoTokenizer):
         super().__init__(model_config)
-        self.model: AutoModel = AutoModel.from_pretrained(consts.XLMR_model, config=model_config)
+        self.model: AutoModel = AutoModel.from_pretrained(consts.XLMR, config=model_config)
         self.model.resize_token_embeddings(len(tokenizer))
         self.tokenizer = tokenizer
 
